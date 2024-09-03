@@ -1,4 +1,8 @@
 import streamlit as st
+import pickle 
+
+pickle_file = open("classifier.pkl", 'rb')
+clf = pickle.load(pickle_file)
 
 # Set the page configuration
 st.set_page_config(page_title="Loan Eligibility Form", page_icon="💸", layout="centered")
@@ -48,7 +52,36 @@ gender = st.selectbox("Gender", ["Male", "Female", "Other"])
 married = st.selectbox("Married", ["Yes", "No"])
 applicant_income = st.number_input("Applicant Income", min_value=0, step=1000)
 loan_amount = st.number_input("Loan Amount", min_value=0, step=500)
-credit_history = st.selectbox("Credit History", ["Good", "Bad"])
+credit_history = st.selectbox("Credit History", ["Yes", "No"])
+
+input_lis = []
+if gender == "Male":
+    input_lis.append(1)
+else:
+    input_lis.append(0)
+    
+if married == "Yes":
+    input_lis.append(1)
+else:
+    input_lis.append(0)
+    
+input_lis.append(int(applicant_income))
+input_lis.append(int(loan_amount))
+
+if credit_history == 'Yes':
+    input_lis.append(1)
+else:
+    input_lis.append(0)
+
+
+print("Debug 0", input_lis)
+result = clf.predict([input_lis])
+print("Debug 1", result)
+
+if result[0] == 0:
+    pred = "Rejected"
+else:
+    pred = "Approved"
 
 # Display the entered information
 st.write("## Summary")
@@ -60,4 +93,4 @@ st.write(f"**Credit History:** {credit_history}")
 
 # Add some interactivity with a button
 if st.button('Submit'):
-    st.write("Thank you for submitting your details!")
+    st.write("Your Loan Status []!".format(result))
