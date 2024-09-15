@@ -1,5 +1,10 @@
+# importing libraries
 import streamlit as st
 import pickle
+
+#model open
+model_pickle = open("./classifier.pkl", "rb")
+clf = pickle.load(model_pickle)
 
 # Set the page configuration
 st.set_page_config(page_title="Loan Eligibility Form", page_icon="💸", layout="centered")
@@ -39,9 +44,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-#model open
-model_pickle = open("./classifier.pkl", "rb")
-clf = pickle.load(model_pickle)
+
 
 # Set up the title and description
 st.title("Loan Eligibility Form")
@@ -92,5 +95,5 @@ st.write(f"**Credit History:** {credit_history1}")
 
 # Add some interactivity with a button
 if st.button('Submit'):
-    st.write("Your loan status is", pred)
+    st.write("Your loan status is", pred, result)
     # st.write(f"Preprocessed inputs are : {gender, married, applicant_income, loan_amount, credit_history}")
