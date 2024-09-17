@@ -1,7 +1,7 @@
 # Importing libraries
 import streamlit as st
 import pickle
-import sklearn
+# import sklearn
 
 # Load the model
 with open("./classifier.pkl", "rb") as model_file:
