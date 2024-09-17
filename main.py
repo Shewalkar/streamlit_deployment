@@ -2,6 +2,7 @@
 import streamlit as st
 import pickle
 import sklearn
+
 # Load the model
 with open("./classifier.pkl", "rb") as model_file:
     clf = pickle.load(model_file)
