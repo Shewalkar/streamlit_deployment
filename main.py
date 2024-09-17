@@ -1,7 +1,7 @@
 # Importing libraries
 import streamlit as st
 import pickle
-
+pip install -r requirements.txt
 # Load the model
 with open("./classifier.pkl", "rb") as model_file:
     clf = pickle.load(model_file)
