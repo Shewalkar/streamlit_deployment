@@ -1,10 +1,15 @@
+print("Working 1")
 import streamlit as st
 import pickle
+
+print("Working 2")
 
 model_pickle = open("./classifier.pkl", "rb")
 clf = pickle.load(model_pickle)
 # Set the page configuration
 st.set_page_config(page_title="Loan Eligibility Form", page_icon="💸", layout="centered")
+
+print("Working 3")
 
 # Apply custom CSS for a colorful theme
 st.markdown(
@@ -46,12 +51,16 @@ st.markdown(
 st.title("Loan Eligibility Form")
 st.write("Please fill out the details below:")
 
+print("Working 4")
+
 # Create input fields for the form
 gender = st.selectbox("Gender", ["Male", "Female", "Other"])
 married = st.selectbox("Married", ["Yes", "No"])
 applicant_income = st.number_input("Applicant Income", min_value=0, step=1000)
 loan_amount = st.number_input("Loan Amount", min_value=0, step=500)
 credit_history = st.selectbox("Credit History", ["Yes", "No"])
+
+print("Working 5")
 
 #Preprocessing the Input to feed to the Model
 if gender == 'Male':
@@ -69,6 +78,7 @@ if credit_history == 'Yes':
 else:
     credit_history = 0
 
+print("Working 6")
 
 # Display the entered information
 st.write("## Summary")
